@@ -1,0 +1,43 @@
+# Arquivo de configuração do pre-commit
+
+repos:
+  # --- Hooks de Higiene de Arquivos ---
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-yaml              # Valida sintaxe de arquivos YAML
+        exclude: '^\.github/workflows/'
+      - id: check-json              # Valida sintaxe de arquivos JSON
+      - id: trailing-whitespace     # Remove espaços extras no fim das linhas
+        exclude: '\.md$'
+      - id: end-of-file-fixer       # Garante nova linha no final dos arquivos
+
+  # --- Padronização de Mensagens de Commit ---
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v3.13.0
+    hooks:
+      - id: commitizen
+        stages: [commit-msg]
+
+  # --- Limpeza de Outputs de Jupyter Notebooks ---
+  - repo: https://github.com/kynan/nbstripout
+    rev: 0.7.1
+    hooks:
+      - id: nbstripout
+
+  # --- Ruff: Linter e Formatter ---
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.12.1
+    hooks:
+      # Linter: Análise e correção automática
+      - id: ruff
+        args: [
+          --fix,                    # Executa correções automáticas
+          --exit-non-zero-on-fix    # Retorna erro se houver autofix
+        ]
+        types_or: [python, pyi, jupyter] # Analisa scripts e notebooks
+
+      # Formatter: Padronização visual (estilo Black)
+      - id: ruff-format
+        types_or: [python, pyi]     # Formata apenas scripts e stub files
+        exclude: '\.ipynb$'          # Protege a estrutura interna do notebook
