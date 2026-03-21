@@ -1,0 +1,39 @@
+[tool.ruff]
+# Define o limite de linha global para 140 caracteres
+line-length = 140
+
+[tool.ruff.lint]
+# Exclui arquivos de notebook do processo de linting, pois eles podem conter código experimental e não estruturado
+exclude = ["*.ipynb"]
+# Regras ativas: F (Erros), E/W (Estilo), I (Imports), D (Docstrings),
+# UP (Sintaxe), B (Bugs), N (Nomenclatura), PYI (Interfaces)
+select = [
+    "F", "E", "W", "I", "D", "UP", "B", "N", "PYI"
+]
+
+# Regras ignoradas:
+# D100: Sem docstring no topo / D104: Sem docstring em __init__
+ignore = ["D100", "D104"]
+
+# Habilita correção automática para todas as regras acima
+fixable = ["ALL"]
+
+# Bloqueia a correção automática para regras específicas (Sinaliza mas não apaga)
+unfixable = ["F401", "F841"] # F401 (imports), F841 (variáveis)
+
+[tool.ruff.lint.pydocstyle]
+# Estilo de documentação NumPy
+convention = "numpy"
+
+[tool.ruff.format]
+# Estilo de formatação visual (Padrão Black)
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
+
+# Mantém a vírgula final para decidir quebras de linha (padrão Black)
+skip-magic-trailing-comma = false
+
+# Formata blocos de código dentro das docstrings
+docstring-code-format = true
+docstring-code-line-length = 140
