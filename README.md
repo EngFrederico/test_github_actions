@@ -1,4 +1,4 @@
-# test_github_actions
+# Repositório de Estudos Sobre o Uso do Github Actions
 
 Este repositório é um projeto de estudo para aprender e demonstrar o uso do GitHub Actions.
 O objetivo é criar workflows que verifiquem automaticamente o código em Pull Requests para a branch `main` — executando checks de `pre-commit` e os testes unitários com `pytest`.
